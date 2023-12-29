@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.watchList-action-btn{
+  display: none;
+  cursor: pointer;
+}
+.movie-card:hover .watchList-action-btn{
+  display: block;
+}

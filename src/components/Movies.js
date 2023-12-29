@@ -4,6 +4,13 @@ import axios from "axios";
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
+//   const [hovered, setHover] = useState('');
+
+//   // handle mouse hove effect on action btn
+//   let showActionBtn = ()=>{
+
+//   }
+
 
   //handle watchlist methods
 
@@ -42,30 +49,35 @@ function Movies() {
           return (
             <div
               key={movie.id}
-              className="w-[200px] h-[35vh] bg-center bg-cover m-3 rounded-xl md:h[40vh] md:w[200px] hover:scale-110 duration-300 relative flex items-end"
+              className="movie-card w-[200px] h-[35vh] bg-center bg-cover m-3 rounded-xl md:h[40vh] md:w[200px] hover:scale-110 duration-300 relative flex items-end"
               style={{
                 backgroundImage: `url(https://image.tmdb.org/t/p/original/t/p/w500/${movie.poster_path})`,
               }}>
+
               <p className="text-white font-bold text-center w-full bg-gray-900 bg-opacity-60">
                 {movie.title}
               </p>
-              {/* Show hide add to watch list and remove from watch list button  */}
 
-              {watchList.includes(movie.id) ? (
-                <div
-                  onClick={() => removeFromWatchList(movie.id)}
-                  className="text-2xl bg-gray-900 rounded-2xl absolute right-2 top-2 h-8 w-8 text-center text-red-600">
-                  ✖
-                </div>
-              ) : (
-                <div
-                  onClick={() => addToWatchList(movie.id)}
-                  className="text-2xl bg-gray-900 rounded-2xl absolute right-2 top-2 h-8 w-8 text-center">
-                  😍
-                </div>
-              )}
+              {/* Show hide add to watch list button  */}
 
-              {/* Show hide add to watch list and remove from watch list button  */}
+              <div className="watchList-action-btn">
+                {watchList.includes(movie.id) ? (
+                    <div
+                    onClick={() => removeFromWatchList(movie.id)}
+                    className="text-2xl bg-gray-900 rounded-2xl absolute right-2 top-2 h-8 w-8 text-center text-red-600">
+                    ✖
+                    </div>
+                ) : (
+                    <div
+                    onClick={() => addToWatchList(movie.id)}
+                    className="text-2xl bg-gray-900 rounded-2xl absolute right-2 top-2 h-8 w-8 text-center">
+                    😍
+                    </div>
+                )}
+              </div>
+
+              {/* Show hide add to watch list button  */}
+
             </div>
           );
         })}
