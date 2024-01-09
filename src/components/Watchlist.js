@@ -30,9 +30,9 @@ function Watchlist() {
     let temp = favourites.map((favourite) => {
       return genreids[favourite.genre_ids[0]];
     });
-
+    temp = new Set(temp);
     setGeners(["All Geners", ...temp]);
-  }, []);
+  });
 
   useEffect(() => {
     let moviesFromLocalStorage = localStorage.getItem("imdb");
@@ -49,7 +49,7 @@ function Watchlist() {
           return (
             <button
               className="tst">
-              {gener}
+              {gener} 
             </button>
           );
         })}
@@ -79,7 +79,7 @@ function Watchlist() {
                   </td>
                   <td className=" pl-6 py-4">{movie.vote_average}</td>
                   <td className="pl-6 py-4">{movie.popularity}</td>
-                  <td className="py-4">{movie.genre_ids}</td>
+                  <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
                   <td>
                     <button className="text-red-600">Delete</button>
                   </td>
