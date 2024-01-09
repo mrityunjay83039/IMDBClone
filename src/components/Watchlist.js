@@ -1,80 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function Watchlist() {
-  let movies = [
-    {
-      adult: false,
-      backdrop_path: "/f1AQhx6ZfGhPZFTVKgxG91PhEYc.jpg",
-      id: 753342,
-      title: "Napoleon",
-      original_language: "en",
-      original_title: "Napoleon",
-      overview:
-        "An epic that details the checkered rise and fall of French Emperor Napoleon Bonaparte and his relentless journey to power through the prism of his addictive, volatile relationship with his wife, Josephine.",
-      poster_path: "/jE5o7y9K6pZtWNNMEw3IdpHuncR.jpg",
-      media_type: "movie",
-      genre_ids: [36, 12, 10752, 18],
-      popularity: 398.187,
-      release_date: "2023-11-22",
-      video: false,
-      vote_average: 6.4,
-      vote_count: 900,
-    },
-    {
-      adult: false,
-      backdrop_path: "/vdpE5pjJVql5aD6pnzRqlFmgxXf.jpg",
-      id: 906126,
-      title: "Society of the Snow",
-      original_language: "es",
-      original_title: "La sociedad de la nieve",
-      overview:
-        "On October 13, 1972, Uruguayan Air Force Flight 571, chartered to take a rugby team to Chile, crashes into a glacier in the heart of the Andes.",
-      poster_path: "/k7rEpZfNPB35FFHB00ZhXHKTL7X.jpg",
-      media_type: "movie",
-      genre_ids: [18, 36],
-      popularity: 917.756,
-      release_date: "2023-12-13",
-      video: false,
-      vote_average: 8.128,
-      vote_count: 392,
-    },
-    {
-      adult: false,
-      backdrop_path: "/rLb2cwF3Pazuxaj0sRXQ037tGI1.jpg",
-      id: 872585,
-      title: "Oppenheimer",
-      original_language: "en",
-      original_title: "Oppenheimer",
-      overview:
-        "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.",
-      poster_path: "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
-      media_type: "movie",
-      genre_ids: [18, 36],
-      popularity: 1129.554,
-      release_date: "2023-07-19",
-      video: false,
-      vote_average: 8.117,
-      vote_count: 5982,
-    },
-    {
-      adult: false,
-      backdrop_path: "/ckAwjXyW7LQEbvjdbzJGEJNSfWl.jpg",
-      id: 374252,
-      title: "Shaun the Sheep: The Farmer's Llamas",
-      original_language: "en",
-      original_title: "Shaun the Sheep: The Farmer's Llamas",
-      overview:
-        "Shaun bluffs his dimwitted farmer master into bidding for three llamas at a county fair. Once they arrive, however, they cause such chaotic destructive mayhem that Shaun has to carefully remove them – high-speed chases, careful rooftop scrambles and dangerous falls ensue.",
-      poster_path: "/a3wjyadC2l3ehoqHjKlk5w89ErM.jpg",
-      media_type: "movie",
-      genre_ids: [10770, 10751, 16, 35],
-      popularity: 10.024,
-      release_date: "2015-11-13",
-      video: false,
-      vote_average: 6.8,
-      vote_count: 53,
-    },
-  ];
+    const [favourites, setFavourites] = useState([]);
+
+    useEffect(() => {
+        let moviesFromLocalStorage = localStorage.getItem("imdb");
+    
+        moviesFromLocalStorage = JSON.parse(moviesFromLocalStorage);
+    
+        setFavourites(moviesFromLocalStorage);
+    }, []);
 
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
@@ -88,7 +23,7 @@ function Watchlist() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-          {movies.map((movie) => {
+          {favourites.map((movie) => {
             return (
               <tr className="hover:bg-gray-50">
                 <td className="flex items-center px-6 py-4 font-normal text-gray-900 space-x-2">
