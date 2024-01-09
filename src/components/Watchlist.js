@@ -27,6 +27,15 @@ function Watchlist() {
     37: "Western",
   };
 
+  //  Filter Watchlist according to the filter button click
+  let filteredArr = [];
+  filteredArr =
+    currentGener === "All Geners"
+      ? favourites
+      : favourites.filter((movie) => {
+          return currentGener == genreids[movie.genre_ids[0]];
+        });
+
   useEffect(() => {
     let temp = favourites.map((favourite) => {
       return genreids[favourite.genre_ids[0]];
@@ -71,7 +80,7 @@ function Watchlist() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {favourites.map((movie) => {
+            {filteredArr.map((movie) => {
               return (
                 <tr className="hover:bg-gray-50">
                   <td className="flex items-center px-6 py-4 font-normal text-gray-900 space-x-2">
