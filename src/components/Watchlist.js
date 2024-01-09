@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 function Watchlist() {
   const [favourites, setFavourites] = useState([]);
   const [geners, setGeners] = useState([]);
+  const [currentGener, setCurrentGener] = useState("All Geners");
 
   let genreids = {
     28: "Action",
@@ -48,8 +49,13 @@ function Watchlist() {
         {geners.map((gener) => {
           return (
             <button
-              className="tst">
-              {gener} 
+              className={
+                currentGener == gener
+                  ? "m-2 text-lg p-1 px-2 bg-blue-400 text-white rounded-xl font-bold"
+                  : "m-2 text-lg p-1 px-2 bg-gray-400 hover:bg-blue-400 text-white rounded-xl font-bold"
+              }
+              onClick={() => setCurrentGener(gener)}>
+              {gener}
             </button>
           );
         })}
