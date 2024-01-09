@@ -28,7 +28,6 @@ function App() {
 
           </Routes>
         </main>
-        
       </BrowserRouter>
     </div>
   );
