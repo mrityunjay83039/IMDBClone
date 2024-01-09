@@ -4,13 +4,6 @@ import axios from "axios";
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
-//   const [hovered, setHover] = useState('');
-
-//   // handle mouse hove effect on action btn
-//   let showActionBtn = ()=>{
-
-//   }
-
 
   //handle watchlist methods
 
