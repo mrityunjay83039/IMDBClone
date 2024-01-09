@@ -27,10 +27,19 @@ function Watchlist() {
     37: "Western",
   };
 
+  // Delete from watchlist method on click of delete button
+  let deleteFromWatchList = (movie) => {
+    let newArr = favourites.filter((m) => {
+      return m.id != movie.id;
+    });
+    setFavourites([...newArr]);
+    localStorage.setItem("imdb", JSON.stringify(newArr));
+  };
+
   //  Filter Watchlist according to the filter button click
   let filteredArr = [];
   filteredArr =
-    currentGener === "All Geners"
+    currentGener == "All Geners"
       ? favourites
       : favourites.filter((movie) => {
           return currentGener == genreids[movie.genre_ids[0]];
@@ -42,7 +51,7 @@ function Watchlist() {
     });
     temp = new Set(temp);
     setGeners(["All Geners", ...temp]);
-  });
+  },[favourites]);
 
   useEffect(() => {
     let moviesFromLocalStorage = localStorage.getItem("imdb");
@@ -96,7 +105,11 @@ function Watchlist() {
                   <td className="pl-6 py-4">{movie.popularity}</td>
                   <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
                   <td>
-                    <button className="text-red-600">Delete</button>
+                    <button
+                      onClick={()=>deleteFromWatchList(movie)}
+                      className="text-red-600">
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
