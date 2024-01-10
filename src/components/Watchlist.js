@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import upArrow from '../upward-arrow-icon.png';
-import downArrow from '../downward-arrow-icon.png';
+import upArrow from "../upward-arrow-icon.png";
+import downArrow from "../downward-arrow-icon.png";
 
 function Watchlist() {
   const [favourites, setFavourites] = useState([]);
   const [geners, setGeners] = useState([]);
   const [currentGener, setCurrentGener] = useState("All Geners");
+  const [rating, setRating] = useState(1);
+  const [popularity, setPopularity] = useState(1);
 
   let genreids = {
     28: "Action",
@@ -47,13 +49,39 @@ function Watchlist() {
           return currentGener == genreids[movie.genre_ids[0]];
         });
 
+  // Sorting with Respect to ratings
+  if (rating == -1) {
+    filteredArr = filteredArr.sort(function (objA, objB) {
+      return objB.vote_average - objA.vote_average;
+    });
+  }
+
+  if (rating == 1) {
+    filteredArr = filteredArr.sort(function (objA, objB) {
+      return objA.vote_average - objB.vote_average;
+    });
+  }
+
+  // Sorting with Respect to Popularity
+  if (popularity == -1) {
+    filteredArr = filteredArr.sort(function (objA, objB) {
+      return objB.popularity - objA.popularity;
+    });
+  }
+
+  if (popularity == 1) {
+    filteredArr = filteredArr.sort(function (objA, objB) {
+      return objA.popularity - objB.popularity;
+    });
+  }
+
   useEffect(() => {
     let temp = favourites.map((favourite) => {
       return genreids[favourite.genre_ids[0]];
     });
     temp = new Set(temp);
     setGeners(["All Geners", ...temp]);
-  },[favourites]);
+  }, [favourites]);
 
   useEffect(() => {
     let moviesFromLocalStorage = localStorage.getItem("imdb");
@@ -86,14 +114,42 @@ function Watchlist() {
             <tr>
               <th className="px-6 py-4 font-medium text-gray-900">Name</th>
               <th>
-                <img src={upArrow} className="sorting-icon" alt="sort increasing order"/>
+                <img
+                  src={upArrow}
+                  className="sorting-icon"
+                  alt="sort increasing order"
+                  onClick={() => {
+                    setRating(1);
+                  }}
+                />
                 <span>Rating</span>
-                <img src={downArrow} className="sorting-icon" alt="sort decreasing order"/>
+                <img
+                  src={downArrow}
+                  className="sorting-icon"
+                  alt="sort decreasing order"
+                  onClick={() => {
+                    setRating(-1);
+                  }}
+                />
               </th>
               <th>
-                <img src={upArrow} className="sorting-icon" alt="sort increasing order"/>
+                <img
+                  src={upArrow}
+                  className="sorting-icon"
+                  alt="sort increasing order"
+                  onClick={() => {
+                    setPopularity(1);
+                  }}
+                />
                 <span>Popularity</span>
-                <img src={downArrow} className="sorting-icon" alt="sort decreasing order"/>
+                <img
+                  src={downArrow}
+                  className="sorting-icon"
+                  alt="sort decreasing order"
+                  onClick={() => {
+                    setPopularity(-1);
+                  }}
+                />
               </th>
               <th>Gener</th>
             </tr>
@@ -116,7 +172,7 @@ function Watchlist() {
                   <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
                   <td>
                     <button
-                      onClick={()=>deleteFromWatchList(movie)}
+                      onClick={() => deleteFromWatchList(movie)}
                       className="text-red-600">
                       Delete
                     </button>
