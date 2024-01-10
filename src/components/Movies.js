@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Pagination from "./Pagination";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -83,7 +84,8 @@ function Movies() {
           );
         })}
       </div>
-    </section>
+      <Pagination/>
+    </section>    
   );
 }
 
