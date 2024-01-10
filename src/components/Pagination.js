@@ -1,33 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Pagination() {
+function Pagination({pageno, onNext, onPrev}) {
+    
   return (
     <>
-      <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-        <div class="flex flex-1 justify-between sm:hidden">
+      <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+        <div className="flex flex-1 justify-between sm:hidden">
           <a
-            href="#"
-            class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+            onClick={onPrev}
+            className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
             Previous
           </a>
           <a
-            href="#"
-            class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+            onClick={onNext}
+            className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
             Next
           </a>
         </div>
-        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-center">
+        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-center">
 
           <div>
             <nav
-              class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+              className="isolate inline-flex -space-x-px rounded-md shadow-sm"
               aria-label="Pagination">
-              <a
-                href="#"
-                class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                <span class="sr-only">Previous</span>
+              <button
+                onClick={onPrev}
+                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                <span className="sr-only">Previous</span>
                 <svg
-                  class="h-5 w-5"
+                  className="h-5 w-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true">
@@ -37,20 +38,21 @@ function Pagination() {
                     clip-rule="evenodd"
                   />
                 </svg>
-              </a>
+              </button>
 
               
-              <a
-                href="#"
-                class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                1
-              </a>
-              <a
-                href="#"
-                class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                <span class="sr-only">Next</span>
+              <span
+                
+                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                {pageno}
+              </span>
+              <button
+                onClick={onNext}
+                
+                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                <span className="sr-only">Next</span>
                 <svg
-                  class="h-5 w-5"
+                  className="h-5 w-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   aria-hidden="true">
@@ -60,7 +62,7 @@ function Pagination() {
                     clip-rule="evenodd"
                   />
                 </svg>
-              </a>
+              </button>
             </nav>
           </div>
         </div>

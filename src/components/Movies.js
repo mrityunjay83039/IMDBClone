@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [watchList, setWatchList] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
 
   //handle watchlist methods
 
@@ -23,7 +24,16 @@ function Movies() {
     localStorage.setItem("imdb", JSON.stringify(filteredWatchList));
   };
 
-  console.log(watchList);
+  // on click of next button of pagination
+  let onNext = () => {
+    setPageNum(pageNum + 1);
+  }
+
+  let onPrev = () => {
+    if (pageNum > 1) {
+      setPageNum(pageNum - 1);
+    }
+  }
 
   // Fetch API Data
   useEffect(() => {
@@ -34,14 +44,14 @@ function Movies() {
 
       axios
         .get(
-          `https://api.themoviedb.org/3/trending/movie/day?api_key=ed9945885ba0c6f7a7edc57b379191ae`
+          `https://api.themoviedb.org/3/trending/movie/day?api_key=ed9945885ba0c6f7a7edc57b379191ae&page=${pageNum}`
         )
         .then((res) => {
           setMovies(res.data.results);
           console.log(res.data.results);
         });
     })();
-  }, []);
+  }, [pageNum]);
 
   return (
     <section>
@@ -84,8 +94,8 @@ function Movies() {
           );
         })}
       </div>
-      <Pagination/>
-    </section>    
+      <Pagination pageno={pageNum} onNext={onNext} onPrev={onPrev} />
+    </section>
   );
 }
 
