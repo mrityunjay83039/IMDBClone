@@ -51,7 +51,7 @@ function Movies() {
         )
         .then((res) => {
           setMovies(res.data.results);
-          console.log(res.data.results);
+          // console.log(res.data.results);
         });
     })();
   }, [pageNum]);
@@ -64,9 +64,8 @@ function Movies() {
       <div className="flex flex-wrap">
         {movies.map((movie) => {
           return (
-            <div className="movie-card-container w-[200px]">
+            <div key={movie.id} className="movie-card-container w-[200px]">
               <div
-                key={movie.id}
                 className="movie-card h-[35vh] bg-center bg-cover m-3 rounded-xl md:h[40vh] md:w[200px] hover:scale-110 duration-300 relative flex items-end"
                 style={{
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/t/p/w500/${movie.poster_path})`,
