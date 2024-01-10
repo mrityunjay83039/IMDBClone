@@ -36,13 +36,15 @@ function Movies() {
     }
   };
 
+  useEffect(()=>{
+    let moviesFromLS = localStorage.getItem("imdb");
+    let moviesFromLSWatchList = JSON.parse(moviesFromLS) || [];
+      setWatchList(moviesFromLSWatchList);
+  },[])
+
   // Fetch API Data
   useEffect(() => {
     (function () {
-      let moviesFromLS = localStorage.getItem("imdb");
-      moviesFromLS = JSON.parse(moviesFromLS) || [];
-      setWatchList(moviesFromLS);
-
       axios
         .get(
           `https://api.themoviedb.org/3/trending/movie/day?api_key=ed9945885ba0c6f7a7edc57b379191ae&page=${pageNum}`
@@ -72,7 +74,7 @@ function Movies() {
                 {/* Show hide add to watch list button  */}
 
                 <div className="watchList-action-btn">
-                  {watchList.includes(movie) ? (
+                  {watchList.some((item) => item.id === movie.id) ? (
                     <div
                       onClick={() => removeFromWatchList(movie)}
                       className="text-2xl bg-gray-900 rounded-2xl absolute right-2 top-2 h-8 w-8 text-center text-red-600">
