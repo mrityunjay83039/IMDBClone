@@ -30,3 +30,11 @@ code {
     display: inline-block;
     cursor: pointer;
 }
+.movie-card-container {
+  border: 1px solid #ddd;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import upArrow from "../upward-arrow-icon.png";
 import downArrow from "../downward-arrow-icon.png";
-import ratingIcon from '../rating-icon.png';
+import ratingIcon from "../rating-icon.png";
 
 function Watchlist() {
   const [favourites, setFavourites] = useState([]);
@@ -9,7 +9,7 @@ function Watchlist() {
   const [currentGener, setCurrentGener] = useState("All Geners");
   const [rating, setRating] = useState(1);
   const [popularity, setPopularity] = useState(1);
-  const [searchStr, setSearchStr] = useState('')
+  const [searchStr, setSearchStr] = useState("");
 
   let genreids = {
     28: "Action",
@@ -78,9 +78,9 @@ function Watchlist() {
   }
 
   // Search movies functionality
-  filteredArr = filteredArr.filter((movie)=>{
+  filteredArr = filteredArr.filter((movie) => {
     return movie.title.toLowerCase().includes(searchStr.toLowerCase());
-  })
+  });
 
   useEffect(() => {
     let temp = favourites.map((favourite) => {
@@ -121,7 +121,9 @@ function Watchlist() {
           placeholder="Search Movie"
           className="border p-2 w-1/4 mx-auto mt-2 mb-2"
           value={searchStr}
-          onChange={(e)=>{setSearchStr(e.target.value)}}
+          onChange={(e) => {
+            setSearchStr(e.target.value);
+          }}
         />
       </div>
       <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
@@ -184,8 +186,13 @@ function Watchlist() {
                     </div>
                   </td>
                   <td className=" pl-6 py-4">
-                    <img src={ratingIcon} alt="rating icon" className="inline w-6"/>
-                    {movie.vote_average}</td>
+                    <img
+                      src={ratingIcon}
+                      alt="rating icon"
+                      className="inline w-6"
+                    />
+                    {movie.vote_average}
+                  </td>
                   <td className="pl-6 py-4">{movie.popularity}</td>
                   <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
                   <td>
