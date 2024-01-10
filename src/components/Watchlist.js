@@ -8,6 +8,7 @@ function Watchlist() {
   const [currentGener, setCurrentGener] = useState("All Geners");
   const [rating, setRating] = useState(1);
   const [popularity, setPopularity] = useState(1);
+  const [searchStr, setSearchStr] = useState('')
 
   let genreids = {
     28: "Action",
@@ -75,6 +76,11 @@ function Watchlist() {
     });
   }
 
+  // Search movies functionality
+  filteredArr = filteredArr.filter((movie)=>{
+    return movie.title.toLowerCase().includes(searchStr.toLowerCase());
+  })
+
   useEffect(() => {
     let temp = favourites.map((favourite) => {
       return genreids[favourite.genre_ids[0]];
@@ -107,6 +113,15 @@ function Watchlist() {
             </button>
           );
         })}
+      </div>
+      <div className="flex content-center">
+        <input
+          type="text"
+          placeholder="Search Movie"
+          className="border p-2 w-1/4 mx-auto mt-2 mb-2"
+          value={searchStr}
+          onChange={(e)=>{setSearchStr(e.target.value)}}
+        />
       </div>
       <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
         <table className='w-full border-collapse bg-white text-left text-sm text-gray-500"'>
