@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import upArrow from "../upward-arrow-icon.png";
 import downArrow from "../downward-arrow-icon.png";
+import ratingIcon from '../rating-icon.png';
 
 function Watchlist() {
   const [favourites, setFavourites] = useState([]);
@@ -182,7 +183,9 @@ function Watchlist() {
                       {movie.title}
                     </div>
                   </td>
-                  <td className=" pl-6 py-4">{movie.vote_average}</td>
+                  <td className=" pl-6 py-4">
+                    <img src={ratingIcon} alt="rating icon" className="inline w-6"/>
+                    {movie.vote_average}</td>
                   <td className="pl-6 py-4">{movie.popularity}</td>
                   <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
                   <td>
