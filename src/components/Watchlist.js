@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import upArrow from '../upward-arrow-icon.png';
+import downArrow from '../downward-arrow-icon.png';
 
 function Watchlist() {
   const [favourites, setFavourites] = useState([]);
@@ -83,8 +85,16 @@ function Watchlist() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-4 font-medium text-gray-900">Name</th>
-              <th>Rating</th>
-              <th>Popularity</th>
+              <th>
+                <img src={upArrow} className="sorting-icon" alt="sort increasing order"/>
+                <span>Rating</span>
+                <img src={downArrow} className="sorting-icon" alt="sort decreasing order"/>
+              </th>
+              <th>
+                <img src={upArrow} className="sorting-icon" alt="sort increasing order"/>
+                <span>Popularity</span>
+                <img src={downArrow} className="sorting-icon" alt="sort decreasing order"/>
+              </th>
               <th>Gener</th>
             </tr>
           </thead>

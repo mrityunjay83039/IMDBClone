@@ -22,3 +22,11 @@ code {
 .movie-card:hover .watchList-action-btn{
   display: block;
 }
+
+.sorting-icon{
+  height: 20px;
+    margin: 5px;
+    width: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
