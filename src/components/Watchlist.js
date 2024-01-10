@@ -119,7 +119,7 @@ function Watchlist() {
         <input
           type="text"
           placeholder="Search Movie"
-          className="border p-2 w-1/4 mx-auto mt-2 mb-2"
+          className="border p-2 w-1/4 mx-auto mt-2 mb-2 rounded-md border-slate-400 focus:outline-none "
           value={searchStr}
           onChange={(e) => {
             setSearchStr(e.target.value);
@@ -181,7 +181,7 @@ function Watchlist() {
                       className="h-[6rem]  w-[10rem] object-fit"
                       src={`https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path}`}
                     />
-                    <div className="font-medium text-gray-700  text-sm">
+                    <div className="text-gray-700  text-base pl-4 font-medium">
                       {movie.title}
                     </div>
                   </td>

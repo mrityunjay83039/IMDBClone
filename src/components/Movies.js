@@ -61,7 +61,7 @@ function Movies() {
       <h1 className="text-center font-bold text-2xl m-8 underline decoration-double">
         Trending Movies
       </h1>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center">
         {movies.map((movie) => {
           return (
             <div key={movie.id} className="movie-card-container w-[200px]">
