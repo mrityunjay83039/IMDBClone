@@ -225,7 +225,7 @@ function Watchlist() {
                 <td colSpan="5" className="text-center">
                   {filteredArr === null
                     ? <p className="p-5 font-bold">No Movie added in watchlist</p>
-                    : <p className="p-5 font-bold">No matching movies found</p>}
+                    : <p className="p-5 font-bold">No matching movies found</p>} 
                 </td>
               </tr>
             )}
