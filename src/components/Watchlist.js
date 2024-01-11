@@ -36,7 +36,7 @@ function Watchlist() {
   // Delete from watchlist method on click of delete button
   let deleteFromWatchList = (movie) => {
     let newArr = favourites.filter((m) => {
-      return m.id != movie.id;
+      return m.id !== movie.id;
     });
     setFavourites([...newArr]);
     localStorage.setItem("imdb", JSON.stringify(newArr));
@@ -45,14 +45,14 @@ function Watchlist() {
   //  Filter Watchlist according to the filter button click
   let filteredArr = [];
   filteredArr =
-    currentGener == "All Geners"
+    currentGener === "All Geners"
       ? favourites
       : favourites.filter((movie) => {
-          return currentGener == genreids[movie.genre_ids[0]];
+          return currentGener === genreids[movie.genre_ids[0]];
         });
 
   // Sorting with Respect to ratings
-  if (rating == -1) {
+  if (rating === -1) {
     if (filteredArr && Array.isArray(filteredArr)) {
       filteredArr = filteredArr.sort(function (objA, objB) {
         return objB.vote_average - objA.vote_average;
@@ -60,7 +60,7 @@ function Watchlist() {
     }
   }
 
-  if (rating == 1) {
+  if (rating === 1) {
     if (filteredArr && Array.isArray(filteredArr)) {
       filteredArr = filteredArr.sort(function (objA, objB) {
         return objA.vote_average - objB.vote_average;
@@ -69,7 +69,7 @@ function Watchlist() {
   }
 
   // Sorting with Respect to Popularity
-  if (popularity == -1) {
+  if (popularity === -1) {
     if (filteredArr && Array.isArray(filteredArr)) {
       filteredArr = filteredArr.sort(function (objA, objB) {
         return objB.popularity - objA.popularity;
@@ -77,7 +77,7 @@ function Watchlist() {
     }
   }
 
-  if (popularity == 1) {
+  if (popularity === 1) {
     if (filteredArr && Array.isArray(filteredArr)) {
       filteredArr = filteredArr.sort(function (objA, objB) {
         return objA.popularity - objB.popularity;
@@ -119,7 +119,7 @@ function Watchlist() {
           return (
             <button
               className={
-                currentGener == gener
+                currentGener === gener
                   ? "m-2 text-lg p-1 px-2 bg-blue-400 text-white rounded-xl font-bold"
                   : "m-2 text-lg p-1 px-2 bg-gray-400 hover:bg-blue-400 text-white rounded-xl font-bold"
               }
