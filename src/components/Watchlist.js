@@ -53,39 +53,53 @@ function Watchlist() {
 
   // Sorting with Respect to ratings
   if (rating == -1) {
-    filteredArr = filteredArr.sort(function (objA, objB) {
-      return objB.vote_average - objA.vote_average;
-    });
+    if (filteredArr && Array.isArray(filteredArr)) {
+      filteredArr = filteredArr.sort(function (objA, objB) {
+        return objB.vote_average - objA.vote_average;
+      });
+    }
   }
 
   if (rating == 1) {
-    filteredArr = filteredArr.sort(function (objA, objB) {
-      return objA.vote_average - objB.vote_average;
-    });
+    if (filteredArr && Array.isArray(filteredArr)) {
+      filteredArr = filteredArr.sort(function (objA, objB) {
+        return objA.vote_average - objB.vote_average;
+      });
+    }
   }
 
   // Sorting with Respect to Popularity
   if (popularity == -1) {
-    filteredArr = filteredArr.sort(function (objA, objB) {
-      return objB.popularity - objA.popularity;
-    });
+    if (filteredArr && Array.isArray(filteredArr)) {
+      filteredArr = filteredArr.sort(function (objA, objB) {
+        return objB.popularity - objA.popularity;
+      });
+    }
   }
 
   if (popularity == 1) {
-    filteredArr = filteredArr.sort(function (objA, objB) {
-      return objA.popularity - objB.popularity;
-    });
+    if (filteredArr && Array.isArray(filteredArr)) {
+      filteredArr = filteredArr.sort(function (objA, objB) {
+        return objA.popularity - objB.popularity;
+      });
+    }
   }
 
   // Search movies functionality
-  filteredArr = filteredArr.filter((movie) => {
-    return movie.title.toLowerCase().includes(searchStr.toLowerCase());
-  });
+  if (filteredArr && Array.isArray(filteredArr)) {
+    filteredArr = filteredArr.filter((movie) => {
+      return movie.title.toLowerCase().includes(searchStr.toLowerCase());
+    });
+  }
 
   useEffect(() => {
-    let temp = favourites.map((favourite) => {
-      return genreids[favourite.genre_ids[0]];
-    });
+    let temp;
+    if (favourites && Array.isArray(favourites)){
+      temp = favourites.map((favourite) => {
+        return genreids[favourite.genre_ids[0]];
+      });
+    }
+    
     temp = new Set(temp);
     setGeners(["All Geners", ...temp]);
   }, [favourites]);
@@ -173,38 +187,48 @@ function Watchlist() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-            {filteredArr.map((movie) => {
-              return (
-                <tr className="hover:bg-gray-50">
-                  <td className="flex items-center px-6 py-4 font-normal text-gray-900 space-x-2">
-                    <img
-                      className="h-[6rem]  w-[10rem] object-fit"
-                      src={`https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path}`}
-                    />
-                    <div className="text-gray-700  text-base pl-4 font-medium">
-                      {movie.title}
-                    </div>
-                  </td>
-                  <td className=" pl-6 py-4">
-                    <img
-                      src={ratingIcon}
-                      alt="rating icon"
-                      className="inline w-6"
-                    />
-                    {movie.vote_average}
-                  </td>
-                  <td className="pl-6 py-4">{movie.popularity}</td>
-                  <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
-                  <td>
-                    <button
-                      onClick={() => deleteFromWatchList(movie)}
-                      className="text-red-600">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {Array.isArray(filteredArr) && filteredArr.length > 0 ? (
+              filteredArr.map((movie) => {
+                return (
+                  <tr className="hover:bg-gray-50">
+                    <td className="flex items-center px-6 py-4 font-normal text-gray-900 space-x-2">
+                      <img
+                        className="h-[6rem]  w-[10rem] object-fit"
+                        src={`https://image.tmdb.org/t/p/original/t/p/original/${movie.poster_path}`}
+                      />
+                      <div className="text-gray-700  text-base pl-4 font-medium">
+                        {movie.title}
+                      </div>
+                    </td>
+                    <td className=" pl-6 py-4">
+                      <img
+                        src={ratingIcon}
+                        alt="rating icon"
+                        className="inline w-6"
+                      />
+                      {movie.vote_average}
+                    </td>
+                    <td className="pl-6 py-4">{movie.popularity}</td>
+                    <td className="py-4">{genreids[movie.genre_ids[0]]}</td>
+                    <td>
+                      <button
+                        onClick={() => deleteFromWatchList(movie)}
+                        className="text-red-600">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  {filteredArr === null
+                    ? <p className="p-5 font-bold">No Movie added in watchlist</p>
+                    : <p className="p-5 font-bold">No matching movies found</p>}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
